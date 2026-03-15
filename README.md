@@ -194,6 +194,8 @@ Data validation checks:
 - Negative invoice amounts represent **credit notes or refunds**
 
 ## Approximate time spent
+Estimated time spent on this assignment:
+
 | Task        | Time |
 |-----------------|-------------|
 | Data modeling & schema design       | ~ 2 hours |
@@ -203,6 +205,8 @@ Data validation checks:
 | Analytical Thinking           | ~ 6 hours |
 | Documentation         | ~ 1 hour |
 | Review        | ~ 2 hour |
+
+**Total: ~21 hours**
 
 ## Improvements
 If the dataset grows to hundreds of millions of rows:
