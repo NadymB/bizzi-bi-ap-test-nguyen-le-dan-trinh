@@ -1,0 +1,11 @@
+vendor_id,vendor_name,vendor_category,country,payment_terms_days
+1,FPT Software,IT Services,VN,30
+2,Viettel Telecom,Telecom,VN,30
+3,AWS Singapore,Cloud,SG,45
+4,Microsoft Asia,Software,SG,45
+5,DHL Express,Logistics,DE,30
+6,Shopee Ads,Marketing,SG,30
+7,Meta Ads,Marketing,US,30
+8,Vietnam Airlines,Travel,VN,15
+9,Hilton Hotels,Travel,US,30
+10,KPMG Vietnam,Consulting,VN,30
