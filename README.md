@@ -80,6 +80,23 @@ psql -U postgres -d bizzi_ap
 \q
 ```
 
+## Dataset 
+The dataset contains:
+- 3 `companies`
+- 10 `vendors`
+- 4 `approvers`
+- 201 `approvals`
+- 201 `invoices`
+- 405 `invoice_items`
+- 152 `payments`
+- 2 `currency_rates`
+
+Data validation checks:
+
+- No duplicate invoices
+- No paid invoices without `paid_date`
+- No orphan foreign keys
+
 ## Data Quality Issues
 
 - **11 invoices** were paid before approval
@@ -111,11 +128,9 @@ psql -U postgres -d bizzi_ap
 
 *Missing payment information:* <br>
 
-- There are **47 invoices with missing `paid_date` values**. This may indicate:
-  - Payments not yet processed
-  - Incomplete data recording
-  - Delays in updating the system <br>
-
+- There are **47 invoices with missing `paid_date`**, including **30 approved invoices** and **17 invoices still in submitted status**.
+  - Approved invoices without payment may indicate delays in payment processing or system issues where payment dates were not recorded.
+  - Submitted invoices suggest the approval process may still be pending due to incorrect invoice or delays from approvers.
 - Incomplete payment tracking reduce financial visibility and affect reporting accuracy. <br>
 
 *Data completeness issue:*
@@ -143,8 +158,7 @@ psql -U postgres -d bizzi_ap
   - Viettel Telecom
   - Meta Ads
   - Vietnam Airlines
-  - FPT Software <br>
-
+  - FPT Software 
 - Frequent late payments to strategic vendors may damage long-term business relationships. <br>
 
 *Approval and payment control risk:* <br>
@@ -153,6 +167,11 @@ psql -U postgres -d bizzi_ap
   - Financial reporting errors
   - Unauthorized payments
   - Fraud or compliance issues <br>
+  
+*Data quality risks:* <br>
+
+- One invoice has a negative invoice amount (-500 SGD = 370 USD).
+- This may represent a credit note or refund, but without proper classification it could lead to misinterpretation in financial reporting.
 
 #### 3. Suggested analytics feature:
 *AP workflow monitoring system:* <br>
@@ -168,12 +187,7 @@ psql -U postgres -d bizzi_ap
 
 *AP performance dashboard:* <br>
 
-- A centralized dashboard could monitor key metrics such as:
-  - approval time by department
-  - late payment rate
-  - invoice aging distribution
-  - vendor spend concentration <br>
-- This would improve visibility into AP operations and support better financial decision-making.
+- A centralized dashboard could track key metrics as approval time by department to improve visibility into AP operations and support better financial decision-making.
 
 ## Assumptions
 - Missing `paid_date` indicates invoices **not yet paid**.
