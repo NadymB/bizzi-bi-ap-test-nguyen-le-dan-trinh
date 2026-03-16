@@ -6,7 +6,7 @@
 \echo '======== AVERAGE APPROVAL TIME (MONTHLY) ==========='
 SELECT 
     DATE_TRUNC('month', received_date)::DATE AS month,
-    AVG(approved_date - received_date) AS avg_approval_time_days
+    ROUND(AVG(approved_date - received_date), 0) AS avg_approval_time_days
 FROM invoices
 WHERE approved_date IS NOT NULL
 GROUP BY month
@@ -48,7 +48,8 @@ SELECT
     v.vendor_category,
     SUM(i.invoice_amount) AS total_spend
 FROM invoices AS i 
-JOIN vendors AS v ON i.vendor_id = v.vendor_id 
+JOIN vendors AS v 
+    ON i.vendor_id = v.vendor_id 
 GROUP BY v.vendor_category
 ORDER BY total_spend DESC;
 
@@ -56,7 +57,7 @@ ORDER BY total_spend DESC;
 \echo '======== TOP 10 VENDOR BY SPEND ==========='
 SELECT 
     v.vendor_name,
-    SUM(i.invoice_amount * cr.rate_to_usd) AS total_spend_usd
+    ROUND(SUM(i.invoice_amount * cr.rate_to_usd), 2) AS total_spend_usd
 FROM invoices AS i
 JOIN vendors AS v 
     ON i.vendor_id = v.vendor_id
